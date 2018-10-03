@@ -5,16 +5,57 @@ import { config } from './config'
 
 class App extends Component {
   state = {
-    venues: ['text']
+    venues: []
   }
  
   // create instance of map 
   initMap = () => {
     
     const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 8
+      center: {lat: 47.6062, lng: -122.332},
+      zoom: 10
     });
+    // create info window 
+    var infowindow = new window.google.maps.InfoWindow({
+    content: null
+    });
+    // display list of markers from venues array in state
+    this.state.venues.map( (v) => {
+      // get position of each venue
+      const pos = {lat: v.venue.location.lat, lng: v.venue.location.lng};
+      // create marker and assisgn position and map 
+      const marker = new window.google.maps.Marker(
+        {position: pos,
+        map: map, 
+        animation: window.google.maps.Animation.DROP,
+        title: v.venue.name}
+        );
+
+        const content = `${v.venue.name} <br> 
+        ${v.venue.location.address} <br>
+          ${v.venue.location.city}, ${v.venue.location.state} 
+          ${v.venue.location.postalCode}` 
+
+        // update content
+
+        infowindow.setContent(content)
+
+        marker.addListener("click", function() {
+          // add content to infowindow
+          infowindow.open(map, marker);
+          // marker animation - source: https://developers.google.com/maps/documentation/javascript/examples/marker-animations
+          if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+          } else {
+            marker.setAnimation(window.google.maps.Animation.BOUNCE);
+            setTimeout(function() {
+              marker.setAnimation(null);
+            }, 750);
+          }
+        });
+    })
+    
+
   }
 
   renderMap = () => {
@@ -31,10 +72,11 @@ getVenues = () => {
         // Code for handling API response
         return response.json()
     }).then((data)=>{
+      // Code for setting state with venues
       const venues = data.response.groups[0].items
       this.setState({
         venues
-      })
+      }, this.renderMap())
     })
     .catch((err)=> {
         // Code for handling errors
@@ -44,7 +86,7 @@ getVenues = () => {
 
   componentDidMount() {
   this.getVenues()
-  this.renderMap()
+ 
 
   }
 
