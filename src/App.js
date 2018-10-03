@@ -8,7 +8,8 @@ class App extends Component {
   state = {
     venues: [],
     markers: [],
-    sidebar: true
+    sidebar: true,
+    query: ""
   };
 
   // create instance of map
@@ -17,12 +18,11 @@ class App extends Component {
       center: { lat: 47.6062, lng: -122.332 },
       zoom: 10
     });
-    // create info window
-    var infowindow = new window.google.maps.InfoWindow({
-      content: null
-    });
+
     // create markers array
-    var markers = [];
+    const markers = [];
+    // create info window
+    const infowindow = new window.google.maps.InfoWindow();
     // display list of markers from venues array in state
     this.state.venues.map(v => {
       // get position of each venue
@@ -34,17 +34,15 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP,
         title: v.venue.name
       });
-
       const content = `${v.venue.name} <br> 
-        ${v.venue.location.address} <br>
-          ${v.venue.location.city}, ${v.venue.location.state} 
-          ${v.venue.location.postalCode}`;
+      ${v.venue.location.address} <br>
+      ${v.venue.location.city}, ${v.venue.location.state} 
+      ${v.venue.location.postalCode}`;
 
-      // update marker content
-
-      infowindow.setContent(content);
       // add listener for marker click event
       marker.addListener("click", function() {
+        // update marker content
+        infowindow.setContent(content);
         // add content to infowindow
         infowindow.open(map, marker);
         // marker animation - source: https://developers.google.com/maps/documentation/javascript/examples/marker-animations
@@ -89,7 +87,7 @@ class App extends Component {
         );
       })
       .catch(err => {
-        // Code for handling errors
+        // Code for handling fetch errors
         console.log("error: ", err);
       });
   };
@@ -105,13 +103,32 @@ class App extends Component {
     });
   };
 
-  // click event for menu in header
-
+  updateQuery = query => {
+    this.setState({
+      query: query
+    });
+  };
   render() {
+    let filtered;
+    if (this.state.query) {
+      filtered = this.state.venues.filter(v =>
+        v.venue.name.toLowerCase().includes(this.state.query.toLowerCase())
+      );
+    } else {
+      filtered = this.state.venues;
+    }
     return (
       <Fragment>
         <Header changeSideBar={this.changeSideBar} />
-        {this.state.sidebar && <SideBar changeSideBar={this.changeSideBar} />}
+        {this.state.sidebar && (
+          <SideBar
+            changeSideBar={this.changeSideBar}
+            filtered={filtered}
+            query={this.state.query}
+            updateQuery={this.updateQuery}
+            markers={this.state.markers}
+          />
+        )}
         <div id="map" className="App" />
       </Fragment>
     );
@@ -125,6 +142,9 @@ function loadJS() {
   var script = window.document.createElement("script");
   script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&callback=initMap`;
   script.async = true;
+  script.onerror = function() {
+    alert("Error loading " + this.src); // Error loading https://example.com/404.js
+  };
   ref.parentNode.insertBefore(script, ref);
 }
 
