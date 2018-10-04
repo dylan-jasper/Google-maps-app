@@ -7,6 +7,7 @@ import SideBar from "./components/SideBar";
 class App extends Component {
   state = {
     venues: [],
+    filteredVenues: [],
     markers: [],
     sidebar: true,
     query: ""
@@ -79,9 +80,11 @@ class App extends Component {
       .then(data => {
         // Code for setting state with venues
         const venues = data.response.groups[0].items;
+
         this.setState(
           {
-            venues
+            venues: venues,
+            filteredVenues: venues
           },
           this.renderMap()
         );
@@ -104,26 +107,40 @@ class App extends Component {
   };
 
   updateQuery = query => {
+    if (query) {
+      this.setState({ query: query });
+      //update items and markers
+      this.filterVenues(query);
+    } else {
+      this.setState({ query: "" });
+      this.setState({ filteredVenues: this.state.venues });
+    }
+  };
+
+  // Filter displayed markers and items
+  filterVenues = query => {
     this.setState({
-      query: query
+      filteredVenues: this.state.venues.filter(v => {
+        return v.venue.name.toLowerCase().includes(query.toLowerCase());
+      })
+    });
+    this.state.markers.forEach(m => {
+      if (!this.state.markers) {
+        m.setVisible(true);
+      }
+      m.title.toLowerCase().includes(query.toLowerCase())
+        ? m.setVisible(true)
+        : m.setVisible(false);
     });
   };
   render() {
-    let filtered;
-    if (this.state.query) {
-      filtered = this.state.venues.filter(v =>
-        v.venue.name.toLowerCase().includes(this.state.query.toLowerCase())
-      );
-    } else {
-      filtered = this.state.venues;
-    }
     return (
       <Fragment>
         <Header changeSideBar={this.changeSideBar} />
         {this.state.sidebar && (
           <SideBar
             changeSideBar={this.changeSideBar}
-            filtered={filtered}
+            venues={this.state.filteredVenues}
             query={this.state.query}
             updateQuery={this.updateQuery}
             markers={this.state.markers}

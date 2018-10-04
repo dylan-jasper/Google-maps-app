@@ -26,7 +26,7 @@ class SideBar extends Component {
             placeholder="Filter Venues..."
           />
           <ul>
-            {this.props.filtered.map(v => (
+            {this.props.venues.map(v => (
               <li
                 className="list-item"
                 key={v.venue.id}
