@@ -113,6 +113,7 @@ class App extends Component {
     } else {
       this.setState({ query: "" });
       this.setState({ filteredVenues: this.state.venues });
+      this.state.markers.forEach(m => m.setVisible(true));
     }
   };
 
@@ -124,14 +125,12 @@ class App extends Component {
       })
     });
     this.state.markers.forEach(m => {
-      if (!this.state.markers) {
-        m.setVisible(true);
-      }
       m.title.toLowerCase().includes(query.toLowerCase())
         ? m.setVisible(true)
         : m.setVisible(false);
     });
   };
+
   render() {
     return (
       <Fragment>
