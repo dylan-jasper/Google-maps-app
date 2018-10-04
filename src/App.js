@@ -109,7 +109,6 @@ class App extends Component {
   updateQuery = query => {
     if (query) {
       this.setState({ query: query });
-      //update items and markers
       this.filterVenues(query);
     } else {
       this.setState({ query: "" });
