@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
-// import { config } from "./config";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 
@@ -145,7 +144,9 @@ class App extends Component {
             markers={this.state.markers}
           />
         )}
-        <div id="map" className="App" />
+        <main>
+          <div id="map" className="App" />
+        </main>
       </Fragment>
     );
   }

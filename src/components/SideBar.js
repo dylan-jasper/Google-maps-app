@@ -25,9 +25,11 @@ class SideBar extends Component {
             className="input"
             placeholder="Filter Venues..."
           />
-          <ul>
+          <ul role="list">
             {this.props.venues.map(v => (
               <li
+                tabindex="0"
+                role="listitem"
                 className="list-item"
                 key={v.venue.id}
                 onClick={() => this.triggerMarkerClick(v.venue.name)}
