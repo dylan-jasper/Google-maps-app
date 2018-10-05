@@ -12,4 +12,4 @@ Implemented third-party APIs include Google Maps and Foursquare.
 2. cd into the project and run `npm install`
 3. run `npm start`
 
-_The production version of the app with service worker is located in the build folder_
+The service worker is only enabled in the production version. If you need to test offline capability run `npm run build` and follow the instructions [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment)
