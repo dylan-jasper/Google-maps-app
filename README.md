@@ -11,3 +11,5 @@ Implemented third-party APIs include Google Maps and Foursquare.
 1. Clone the repo
 2. cd into the project and run `npm install`
 3. run `npm start`
+
+_The production version of the app with service worker is located in the build folder_
