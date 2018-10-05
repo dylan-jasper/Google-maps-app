@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
-import { config } from "./config";
+// import { config } from "./config";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 
@@ -91,7 +91,8 @@ class App extends Component {
       })
       .catch(err => {
         // Code for handling fetch errors
-        console.log("error: ", err);
+        console.log("Error: ", err);
+        alert("Error: ", err);
       });
   };
 
