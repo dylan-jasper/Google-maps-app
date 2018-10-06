@@ -13,7 +13,11 @@ class SideBar extends Component {
     return (
       <Fragment>
         <div className="side-bar">
-          <span onClick={this.props.changeSideBar} className="btn-close">
+          <span
+            tabIndex="0"
+            onClick={this.props.changeSideBar}
+            className="btn-close"
+          >
             &times;
           </span>
           <input
@@ -28,7 +32,7 @@ class SideBar extends Component {
           <ul role="list">
             {this.props.venues.map(v => (
               <li
-                tabindex="0"
+                tabIndex="0"
                 role="listitem"
                 className="list-item"
                 key={v.venue.id}

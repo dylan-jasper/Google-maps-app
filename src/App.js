@@ -91,7 +91,7 @@ class App extends Component {
       .catch(err => {
         // Code for handling fetch errors
         console.log("Error: ", err);
-        alert("Error: ", err);
+        alert("Error: Foursquare API failed to load \n", err.toString());
       });
   };
 
@@ -160,7 +160,7 @@ function loadJS() {
   script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&callback=initMap`;
   script.async = true;
   script.onerror = function() {
-    alert("Error loading " + this.src); // Error loading https://example.com/404.js
+    alert("Error loading Google Maps API \n" + this.src); // Error loading https://example.com/404.js
   };
   ref.parentNode.insertBefore(script, ref);
 }
