@@ -14,6 +14,7 @@ class SideBar extends Component {
       <Fragment>
         <div className="side-bar">
           <span
+            aria-label="close"
             tabIndex="0"
             onClick={this.props.changeSideBar}
             className="btn-close"
@@ -21,6 +22,7 @@ class SideBar extends Component {
             &times;
           </span>
           <input
+            aria-label="text input to filter venues"
             type="text"
             value={this.props.query}
             onChange={e => {
@@ -33,7 +35,7 @@ class SideBar extends Component {
             {this.props.venues.map(v => (
               <li
                 tabIndex="0"
-                role="listitem"
+                role="link"
                 className="list-item"
                 key={v.venue.id}
                 onClick={() => this.triggerMarkerClick(v.venue.name)}
