@@ -94,8 +94,15 @@ class App extends Component {
         alert("Error: Foursquare API failed to load");
       });
   };
+  // Handle authentication error with the Google Maps API
+  gm_authFailure() {
+    window.alert("Google Maps authentication error!");
+  }
 
   componentDidMount() {
+    // Bind the gm_authFailure function to the window context
+    window.gm_authFailure = this.gm_authFailure;
+
     this.getVenues();
   }
 

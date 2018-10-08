@@ -22,7 +22,7 @@ class SideBar extends Component {
             &times;
           </span>
           <input
-            aria-label="text input to filter venues"
+            aria-label="filter venues"
             type="text"
             value={this.props.query}
             onChange={e => {
