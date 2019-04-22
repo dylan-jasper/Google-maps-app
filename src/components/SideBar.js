@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 
 class SideBar extends Component {
   triggerMarkerClick = venueName => {
-    this.props.markers.map(marker => {
+    this.props.markers.forEach(marker => {
       if (marker.title === venueName) {
         window.google.maps.event.trigger(marker, "click");
       }
@@ -31,18 +31,20 @@ class SideBar extends Component {
             className="input"
             placeholder="Filter Venues..."
           />
-          <ul role="list">
-            {this.props.venues.map(v => (
-              <li
-                tabIndex="0"
-                role="link"
-                className="list-item"
-                key={v.venue.id}
-                onClick={() => this.triggerMarkerClick(v.venue.name)}
-              >
-                {v.venue.name}
-              </li>
-            ))}
+          <ul>
+            {this.props.venues.map(v => {
+              return (
+                <li
+                  tabIndex="0"
+                  role="link"
+                  className="list-item"
+                  key={v.venue.id}
+                  onClick={() => this.triggerMarkerClick(v.venue.name)}
+                >
+                  {v.venue.name}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </Fragment>

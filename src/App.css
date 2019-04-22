@@ -1,3 +1,4 @@
+/* Map - 60px nav */
 #map {
   height: calc(100vh - 60px);
 }
@@ -5,7 +6,7 @@
 
 nav {
   height: 60px;
-  background-color: #3887be;
+  background-color: #39f;
   text-align: center;
   display: flex;
   justify-content: space-between;
@@ -13,8 +14,8 @@ nav {
 }
 
 nav > h3 {
-  font-size: 26px;
-  color: white;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-right: 10px;
@@ -47,7 +48,6 @@ svg {
   /* opacity: 0.9; */
   overflow-x: hidden;
   padding-top: 60px;
-  transition: 0.5s;
 }
 
 .side-bar > ul {

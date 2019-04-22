@@ -24,7 +24,7 @@ class App extends Component {
     // create info window
     const infowindow = new window.google.maps.InfoWindow();
     // display list of markers from venues array in state
-    this.state.venues.map(v => {
+    this.state.venues.forEach(v => {
       // get position of each venue
       const pos = { lat: v.venue.location.lat, lng: v.venue.location.lng };
       // create marker and assisgn position and map
@@ -34,15 +34,23 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP,
         title: v.venue.name
       });
-      const content = `${v.venue.name} <br> 
-      ${v.venue.location.address} <br>
-      ${v.venue.location.city}, ${v.venue.location.state} 
-      ${v.venue.location.postalCode}`;
+
+      let contentString = `
+      ${v.venue.name}
+      <br>
+      ${
+        v.venue.location.address
+          ? v.venue.location.address
+          : "Address not found"
+      }
+        <br>
+        ${v.venue.location.city}, ${v.venue.location.state}
+        ${v.venue.location.postalCode}`;
 
       // add listener for marker click event
       marker.addListener("click", function() {
         // update marker content
-        infowindow.setContent(content);
+        infowindow.setContent(contentString);
         // add content to infowindow
         infowindow.open(map, marker);
         // marker animation - source: https://developers.google.com/maps/documentation/javascript/examples/marker-animations
