@@ -169,7 +169,7 @@ class App extends Component {
 
 // source: https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
 function loadJS() {
-  var API = "AIzaSyDbAz1XXxDoKSU2nZXec89rcHPxgkvVoiw";
+  var API = "AIzaSyDWh_B0TV_SGragJUkIYYaWyZAghX0VIk4";
   var ref = window.document.getElementsByTagName("script")[0];
   var script = window.document.createElement("script");
   script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&callback=initMap`;
