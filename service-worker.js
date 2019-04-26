@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/Neighborhood-Map/precache-manifest.66588886b46aab0c79ca29cd15358745.js"
+  "/Neighborhood-Map/precache-manifest.a412bf7ababfc71ed70eb63fd21fa9d9.js"
 );
 
 workbox.clientsClaim();
