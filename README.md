@@ -6,6 +6,8 @@ This is a single-page application featuring a neighborhood with trending Foursqu
 
 Implemented third-party APIs include Google Maps and Foursquare.
 
+Note that due to pricing changes on the Maps Platform, the API key is currently inactive. 
+
 > [Live Demo](https://dejasper1.github.io/Neighborhood-Map/)
 
 ## :zap: Quickstart
