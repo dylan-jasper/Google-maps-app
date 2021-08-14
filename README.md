@@ -8,8 +8,6 @@ Implemented third-party APIs include Google Maps and Foursquare.
 
 Note that due to pricing changes on the Maps Platform, the API key is currently inactive. 
 
-> [Live Demo](https://dejasper1.github.io/Neighborhood-Map/)
-
 ## :zap: Quickstart
 
 1. Clone the repo
